@@ -115,6 +115,8 @@ function getSum(num1 = 1, num2 = 1){
 
 getSum(3);
 
+//the getSum here uses only the 1st parameter, so the 2nd gets ignored
+
 // Rest parameters, which are preceeded by ...
 // become an array
 // You can only have 1 rest parameter and it must
