@@ -1,8 +1,9 @@
 "use strict";
-// Add the properties to the Dashboard
-// This is a continuation of the Challenge, in which you are asked to add
-// the 3 properties image and title to the dashboard based on the 
-// properties array
+// Tuple Types
+// 1. Replace the contact values to take an array that contains a
+// phone number and email.
+// 2. Check the inferred Type that appears in the Object Type.
+// 3. Overwrite the inferred type to be a Tuple.
 Object.defineProperty(exports, "__esModule", { value: true });
 const propertyContainer = document.querySelector('.properties');
 const utils_1 = require("./utils");
@@ -48,7 +49,8 @@ const properties = [
             code: 45632,
             country: 'Colombia'
         },
-        contact: 'marywinkle@gmail.com',
+        // this is the defined/assigned Tuple:
+        contact: [+1123495082908, 'marywinkle@gmail.com'],
         isAvailable: true
     },
     {
@@ -61,7 +63,8 @@ const properties = [
             code: 343903,
             country: 'Poland'
         },
-        contact: 'garydavis@hotmail.com',
+        // this is the defined/assigned Tuple:
+        contact: [+1123495082908, 'garydavis@hotmail.com'],
         isAvailable: false
     },
     {
@@ -74,14 +77,15 @@ const properties = [
             code: 35433,
             country: 'United Kingdom',
         },
-        contact: 'andyluger@aol.com',
+        // this is the defined/assigned Tuple:
+        contact: [+1123495082908, 'andyluger@aol.com'],
         isAvailable: true
     }
 ];
 // Functions
 (0, utils_1.showReviewTotal)(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 (0, utils_1.populateUser)(you.isReturning, you.firstName);
-//Add the properties=locations
+// Add the properties
 for (let i = 0; i < properties.length; i++) {
     const card = document.createElement('div');
     card.classList.add('card');
