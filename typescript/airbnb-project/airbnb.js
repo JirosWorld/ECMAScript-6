@@ -1,11 +1,11 @@
 "use strict";
-// Object Types Challenge
-// Based on what we discussed we need to make up our Property Objects an array,
-// can you create that array, making sure to assign the correct Types?
+// Add the properties to the Dashboard
+// This is a continuation of the Challenge, in which you are asked to add
+// the 3 properties image and title to the dashboard based on the 
+// properties array
 Object.defineProperty(exports, "__esModule", { value: true });
+const propertyContainer = document.querySelector('.properties');
 const utils_1 = require("./utils");
-// note: the showReviewTotal- and populateUser-functions have been moved to their own separate file
-// and are destructured/called above here (they are NOT a default export so DO need curly's)
 let isOpen;
 // Reviews
 const reviews = [
@@ -36,10 +36,10 @@ const you = {
     age: 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 };
-//Properties
+// Array of Properties
 const properties = [
     {
-        image: '',
+        image: 'images/colombia-property.jpg',
         title: 'Colombian Shack',
         price: 45,
         location: {
@@ -52,7 +52,7 @@ const properties = [
         isAvailable: true
     },
     {
-        image: '',
+        image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
         price: 34,
         location: {
@@ -65,7 +65,7 @@ const properties = [
         isAvailable: false
     },
     {
-        image: '',
+        image: 'images/london-property.jpg',
         title: 'London Flat',
         price: 23,
         location: {
@@ -81,4 +81,14 @@ const properties = [
 // Functions
 (0, utils_1.showReviewTotal)(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 (0, utils_1.populateUser)(you.isReturning, you.firstName);
+//Add the properties=locations
+for (let i = 0; i < properties.length; i++) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = properties[i].title;
+    const image = document.createElement('img');
+    image.setAttribute('src', properties[i].image);
+    card.appendChild(image);
+    propertyContainer.appendChild(card);
+}
 //# sourceMappingURL=airbnb.js.map
