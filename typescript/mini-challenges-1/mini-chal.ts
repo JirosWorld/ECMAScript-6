@@ -1,14 +1,21 @@
-// Array Types
-// Can you add a stayedAt property to the you Object, that contains places you 
-// have stayed as strings, then add the correct key with assigned type to the 
-// existing Object Type?
+// Array Types mini-challenge
+// Can you assign the correct Type to the reviews const? Please bear in mind everything
+// we have learnt about String, Boolean, Number, Object and Array Types for this.
+
 
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
 const reviewTotalDisplay = document.querySelector('#reviews')
 let isOpen: boolean
 
-const reviews = [
+// this is aan array of objects
+// and inside of it the keys have types
+const reviews : {
+    name: string;
+    stars: number;
+    loyaltyUser: boolean;
+    date: string;
+}[] = [
     {
         name: 'Sheia',
         stars: 5,
@@ -37,30 +44,23 @@ function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
 
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
-
-
 const you: {
     firstName: string;
     lastName: string;
     isReturning: boolean;
     age: number;
-    stringArr: string[];
-    numberArr: number[];
-    // union types:
-    stayedAt: (string | number)[];
+    stayedAt: string[]
 } = {
     firstName: 'Bobby',
     lastName: 'Brown',
     isReturning: true,
     age: 35,
-    stringArr: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
-    numberArr: [45, 99, 23],
-    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow', 23]
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
 
 function populateUser(isReturning : boolean, userName: string ) {
-    if (isReturning){
+    if (isReturning == true){
         returningUserDisplay.innerHTML = 'back'
     }
     userNameDisplay.innerHTML = userName
