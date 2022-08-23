@@ -1,16 +1,16 @@
 // Array Types mini-challenge
-// Can you assign the correct Type to the reviews const? Please bear in mind everything
+// Can youM assign the correct Type to the reviewsM const? Please bear in mind everything
 // we have learnt about String, Boolean, Number, Object and Array Types for this.
 
 
-const returningUserDisplay = document.querySelector('#returning-user')
-const userNameDisplay = document.querySelector('#user')
-const reviewTotalDisplay = document.querySelector('#reviews')
-let isOpen: boolean
+const returningUserDisplayM = document.querySelector('#returning-userm')
+const userNameDisplayM = document.querySelector('#userm')
+const reviewTotalDisplayM = document.querySelector('#reviewsM')
+let isOpenM: boolean
 
 // this is aan array of objects
 // and inside of it the keys have types
-const reviews : {
+const reviewsM : {
     name: string;
     stars: number;
     loyaltyUser: boolean;
@@ -37,14 +37,14 @@ const reviews : {
 ]
 
 
-function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
+function showReviewTotalM(value: number, reviewer: string, isLoyalty: boolean) {
     const iconDisplay = isLoyalty ? '⭐' : ''
-    reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
+    reviewTotalDisplayM.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
-showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
+showReviewTotalM(reviewsM.length, reviewsM[0].name, reviewsM[0].loyaltyUser)
 
-const you: {
+const youM: {
     firstName: string;
     lastName: string;
     isReturning: boolean;
@@ -59,11 +59,11 @@ const you: {
 }
 
 
-function populateUser(isReturning : boolean, userName: string ) {
+function populateUserM(isReturning : boolean, userName: string ) {
     if (isReturning == true){
-        returningUserDisplay.innerHTML = 'back'
+        returningUserDisplayM.innerHTML = 'back'
     }
-    userNameDisplay.innerHTML = userName
+    userNameDisplayM.innerHTML = userName
 }
 
-populateUser(you.isReturning, you.firstName)
+populateUserM(youM.isReturning, youM.firstName)
