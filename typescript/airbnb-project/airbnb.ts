@@ -1,3 +1,5 @@
+// put all code back in one file, because import/export doesn't work
+
 // Tuples challenge
 // 1. Add an array to the variable of currentLocation I have added. This array
 // must have your current location, time, and degrees celcius of your location
@@ -8,35 +10,50 @@
 const propertyContainer = document.querySelector('.properties')
 const footer = document.querySelector('.footer')
 
-import { showReviewTotal, populateUser } from './utils'
+const returningUserDisplay = document.querySelector('#returning-user')
+const userNameDisplay = document.querySelector('#user')
+const reviewTotalDisplay = document.querySelector('#reviews')
+
+function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
+    const iconDisplay = isLoyalty ? '⭐' : ''
+    reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
+}
+
+function populateUser(isReturning: boolean, userName: string) {
+    if (isReturning) {
+        returningUserDisplay.innerHTML = 'back'
+    }
+    userNameDisplay.innerHTML = userName
+}
+
 let isOpen: boolean
 
 // Reviews
-const reviews : { 
-    name: string; 
-    stars: number; 
-    loyaltyUser: boolean; 
+const reviews: {
+    name: string;
+    stars: number;
+    loyaltyUser: boolean;
     date: string
-    }[] = [
-    {
-        name: 'Sheia',
-        stars: 5,
-        loyaltyUser: true,
-        date: '01-04-2021'
-    },
-    {
-        name: 'Andrzej',
-        stars: 3,
-        loyaltyUser: false,
-        date: '28-03-2021'
-    },
-    {
-        name: 'Omar',
-        stars: 4,
-        loyaltyUser: true,
-        date: '27-03-2021'
-    },
-]
+}[] = [
+        {
+            name: 'Sheia',
+            stars: 5,
+            loyaltyUser: true,
+            date: '01-04-2021'
+        },
+        {
+            name: 'Andrzej',
+            stars: 3,
+            loyaltyUser: false,
+            date: '28-03-2021'
+        },
+        {
+            name: 'Omar',
+            stars: 4,
+            loyaltyUser: true,
+            date: '27-03-2021'
+        },
+    ]
 
 // User
 const you: {
@@ -54,7 +71,7 @@ const you: {
 }
 
 // Array of Properties
-const properties : {
+const properties: {
     image: string;
     title: string;
     price: number;
@@ -64,49 +81,49 @@ const properties : {
         code: number;
         country: string;
     };
-    contact: [ number, string ];
+    contact: [number, string];
     isAvailable: boolean;
 }[] = [
-    {
-        image: 'images/colombia-property.jpg',
-        title: 'Colombian Shack',
-        price: 45,
-        location: {
-            firstLine: 'shack 37',
-            city: 'Bogota',
-            code: 45632,
-            country: 'Colombia'
+        {
+            image: 'images/colombia-property.jpg',
+            title: 'Colombian Shack',
+            price: 45,
+            location: {
+                firstLine: 'shack 37',
+                city: 'Bogota',
+                code: 45632,
+                country: 'Colombia'
+            },
+            contact: [+112343823978921, 'marywinkle@gmail.com'],
+            isAvailable: true
         },
-        contact: [+112343823978921, 'marywinkle@gmail.com'],
-        isAvailable: true  
-    },
-    {
-        image: 'images/poland-property.jpg',
-        title: 'Polish Cottage',
-        price: 34,
-        location: {
-            firstLine: 'no 23',
-            city: 'Gdansk',
-            code: 343903,
-            country: 'Poland'
+        {
+            image: 'images/poland-property.jpg',
+            title: 'Polish Cottage',
+            price: 34,
+            location: {
+                firstLine: 'no 23',
+                city: 'Gdansk',
+                code: 343903,
+                country: 'Poland'
+            },
+            contact: [+1298239028490830, 'garydavis@hotmail.com'],
+            isAvailable: false
         },
-        contact: [+1298239028490830, 'garydavis@hotmail.com'],
-        isAvailable: false 
-    },
-    {
-        image: 'images/london-property.jpg',
-        title: 'London Flat',
-        price: 23,
-        location: {
-            firstLine: 'flat 15',
-            city: 'London',
-            code: 35433,
-            country: 'United Kingdom',
-        },
-        contact: [+34829374892553, 'andyluger@aol.com'],
-        isAvailable: true
-    }
-]
+        {
+            image: 'images/london-property.jpg',
+            title: 'London Flat',
+            price: 23,
+            location: {
+                firstLine: 'flat 15',
+                city: 'London',
+                code: 35433,
+                country: 'United Kingdom',
+            },
+            contact: [+34829374892553, 'andyluger@aol.com'],
+            isAvailable: true
+        }
+    ]
 
 
 // Functions
@@ -126,7 +143,7 @@ for (let i = 0; i < properties.length; i++) {
 }
 
 // use your location, your current time, and the current temperature of your
-// location
+//  location
 // declare and assign the Tuple
 // change the innerHTML in order to be able to handle the Tuple and use it like an array
 let currentLocation: [string, string, number] = ['Amsterdam', '20:35', 23]
