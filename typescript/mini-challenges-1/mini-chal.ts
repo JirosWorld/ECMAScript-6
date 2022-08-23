@@ -1,7 +1,7 @@
-// Object Types
-// In this scrim, based on what we just learnt, can you change userName to firstName, then
-// add an age and lastName to the 'you' Object, making sure to account for it in the Specialised
-// Object for defining its structure.
+// Array Types
+// Can you add a stayedAt property to the you Object, that contains places you 
+// have stayed as strings, then add the correct key with assigned type to the 
+// existing Object Type?
 
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
@@ -37,18 +37,27 @@ function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
 
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
-// assign types to the keys of the Object
-// very useful for React
+
 
 const you: {
-    userName : string;
+    firstName: string;
+    lastName: string;
     isReturning: boolean;
+    age: number;
+    stringArr: string[];
+    numberArr: number[];
+    // union types:
+    stayedAt: (string | number)[];
 } = {
-   userName: 'Bobby',
-   isReturning: true,
+    firstName: 'Bobby',
+    lastName: 'Brown',
+    isReturning: true,
+    age: 35,
+    stringArr: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
+    numberArr: [45, 99, 23],
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow', 23]
 }
 
-console.log(you.userName)
 
 function populateUser(isReturning : boolean, userName: string ) {
     if (isReturning){
@@ -57,4 +66,4 @@ function populateUser(isReturning : boolean, userName: string ) {
     userNameDisplay.innerHTML = userName
 }
 
-populateUser(you.isReturning, you.userName)
+populateUser(you.isReturning, you.firstName)
