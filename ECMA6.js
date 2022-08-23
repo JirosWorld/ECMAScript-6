@@ -398,7 +398,7 @@ p1.then((res) => document.write(`${res}<br />`));
 
 // Create a promise that executes after 2 seconds
 var p2 = new Promise(function(resolve, reject){
-    setTimeout(() => resolve('Resolve Me'), 2000);
+    setTimeout(() => resolve('Resolve Me'), 112000);
 });
 
 p2.then((res) => document.write(`${res}<br />`));
