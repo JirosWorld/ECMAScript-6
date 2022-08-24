@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion JS</title>
+</head>
+<body>
+    
+    <script>
+        function multiply(arr, n) {
+            let product = 1;
+            for (let i = 0; i < n; i++) {
+            product *= arr[i];
+            }
+            return product;
+        }
+        console.log(multiply([1], 0) ); //1
+
+        console.log(multiply([2, 3, 4], 1) ); //2
+
+        console.log(multiply([2, 3, 4, 5], 3) ); //24
+
+        function sum(arr, n) {
+        // Only change code below this line
+        if (n <= 0) {
+            return 0;
+            } else {
+            return (sum(arr, n - 1) + arr[n - 1]);
+            }
+        // Only change code above this line
+        }
+        // sum([1], 0) should equal 0.
+        // sum([2, 3, 4], 1) should equal 2.
+        // sum([2, 3, 4, 5], 3) should equal 9.
+
+        console.log(sum([1], 0) ); //1
+
+        console.log(sum([2, 3, 4], 1) ); //3
+
+        console.log(sum([2, 3, 4, 5], 3) ); //10
+        
+        //Code Explanation - The if statement checks to see if sum is evaluating the base case, n <= 0, or not. If it is, then sum returns the answer, 0 - the sum of elements from 0 to 0 inclusive. Otherwise, it recurses by evaluating a simpler function call, sum(arr, n - 1). Once that returns it adds a single array element, arr[n - 1], to it and returns that sum.
+
+        function countdown(n) {
+            if (n < 1) {
+                return [];
+            } else {
+                const arr = countdown(n - 1);
+                arr.splice(0, 0, n);
+                return arr;
+            }
+        }
+            // use Recursion to create a countdown
+            // The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+            console.log(countdown(10));
+
+    </script>
+</body>
+</html>
