@@ -5,108 +5,73 @@ import { showReviewTotal, populateUser } from './utils'
 import { Permissions, LoyaltyUser } from './enums'
 */
 
-
-const propertyContainer = document.querySelector('.properties')
-const footer = document.querySelector('.footer')
-
+// START UTILS
+const reviewTotalDisplay = document.querySelector('#reviews')
 const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
-const reviewTotalDisplay = document.querySelector('#reviews')
 
 function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
-    const iconDisplay = (LoyaltyUser.GOLD_USER) ? '⭐' : ''
+    const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : ''
     reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
-function populateUser(isReturning: boolean, userName: string) {
-    if (isReturning) {
+function populateUser(isReturning : boolean, userName: string ) {
+    if (isReturning == true){
         returningUserDisplay.innerHTML = 'back'
     }
     userNameDisplay.innerHTML = userName
 }
-
-let isOpen: boolean
-
-// Reviews
-enum LoyaltyUser {
-    GOLD_USER = 'GOLD_USER', 
-    SILVER_USER = 'SILVER_USER',
-    BRONZE_USER = 'BRONZE_USER'
-}
-
-// if you already know which kind of structures your data will have, and it
-// will have only TWO different ones, you can assign all the types
-// with a UNION pipe stripey thingy like so:
-
-/*
-// Reviews
-const reviews : (
-    {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;   
-} |
-{
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;
-    description: string;
-}
-)[]= [
-    {
-        ...
-*/
-
-// if you have AbsoLuteLy NO idea what amount of variables will come in, you can use the ANY type liek so:
-
-/*
-const reviews : any[] = [
-    {...
-*/
-
-const reviews: {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string
-}[] = [
-        {
-            name: 'Sheia',
-            stars: 5,
-            loyaltyUser: LoyaltyUser.GOLD_USER,
-            date: '01-04-2021'
-        },
-        {
-            name: 'Andrzej',
-            stars: 3,
-            loyaltyUser: LoyaltyUser.BRONZE_USER,
-            date: '28-03-2021'
-        },
-        {
-            name: 'Omar',
-            stars: 4,
-            loyaltyUser: LoyaltyUser.SILVER_USER,
-            date: '27-03-2021'
-        },
-    ]
+// END UTILS
 
 
-// User
+// START ENUMS
 enum Permissions {
     ADMIN = 'ADMIN', 
     READ_ONLY = 'READ_ONLY'
 }
 
-const you: {
-    firstName: string;
-    lastName: string;
-    permissions: Permissions;
-    isReturning: boolean;
-    age: number;
-    stayedAt: string[]
-} = {
+enum LoyaltyUser {
+    GOLD_USER = 'GOLD_USER',
+    SILVER_USER = 'SILVER_USER',
+    BRONZE_USER = 'BRONZE_USER'
+}
+// END ENUMS
+
+// Union Types Challenge
+// 1. Fix the function to show the price per night for each property card only
+// if isLoggedIn is true, or the you object has Permissions. (all permissions should work)
+// 2. See what happens when a null object to be passed to the you objects permissions.
+
+
+const propertyContainer = document.querySelector('.properties')
+const footer = document.querySelector('.footer')
+
+let isLoggedIn: boolean
+
+// Reviews
+const reviews : any[] = [
+    {
+        name: 'Sheia',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '01-04-2021'
+    },
+    {
+        name: 'Andrzej',
+        stars: 3,
+        loyaltyUser: LoyaltyUser.BRONZE_USER,
+        date: '28-03-2021'
+    },
+    {
+        name: 'Omar',
+        stars: 4,
+        loyaltyUser: LoyaltyUser.SILVER_USER,
+        date: '27-03-2021',
+        description: 'Great hosts, location was a bit further than said.'
+    },
+]
+
+const you = {
     firstName: 'Bobby',
     lastName: 'Brown',
     permissions: Permissions.ADMIN,
@@ -115,16 +80,9 @@ const you: {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-if (you.permissions === Permissions.ADMIN) {
-    //show
-    console.log("The custom-type enum for Admin works!")
-} else {
-    console.log("You are not an administrator.")
-}
-
 
 // Array of Properties
-const properties: {
+const properties : {
     image: string;
     title: string;
     price: number;
@@ -134,55 +92,66 @@ const properties: {
         code: number;
         country: string;
     };
-    contact: [number, string];
+    contact: [ number, string ];
     isAvailable: boolean;
 }[] = [
-        {
-            image: 'images/colombia-property.jpg',
-            title: 'Colombian Shack',
-            price: 45,
-            location: {
-                firstLine: 'shack 37',
-                city: 'Bogota',
-                code: 45632,
-                country: 'Colombia'
-            },
-            contact: [+112343823978921, 'marywinkle@gmail.com'],
-            isAvailable: true
+    {
+        image: 'images/colombia-property.jpg',
+        title: 'Colombian Shack',
+        price: 45,
+        location: {
+            firstLine: 'shack 37',
+            city: 'Bogota',
+            code: 45632,
+            country: 'Colombia'
         },
-        {
-            image: 'images/poland-property.jpg',
-            title: 'Polish Cottage',
-            price: 34,
-            location: {
-                firstLine: 'no 23',
-                city: 'Gdansk',
-                code: 343903,
-                country: 'Poland'
-            },
-            contact: [+1298239028490830, 'garydavis@hotmail.com'],
-            isAvailable: false
+        contact: [+112343823978921, 'marywinkle@gmail.com'],
+        isAvailable: true  
+    },
+    {
+        image: 'images/poland-property.jpg',
+        title: 'Polish Cottage',
+        price: 34,
+        location: {
+            firstLine: 'no 23',
+            city: 'Gdansk',
+            code: 343903,
+            country: 'Poland'
         },
-        {
-            image: 'images/london-property.jpg',
-            title: 'London Flat',
-            price: 23,
-            location: {
-                firstLine: 'flat 15',
-                city: 'London',
-                code: 35433,
-                country: 'United Kingdom',
-            },
-            contact: [+34829374892553, 'andyluger@aol.com'],
-            isAvailable: true
-        }
-    ]
-
+        contact: [+1298239028490830, 'garydavis@hotmail.com'],
+        isAvailable: false 
+    },
+    {
+        image: 'images/london-property.jpg',
+        title: 'London Flat',
+        price: 23,
+        location: {
+            firstLine: 'flat 15',
+            city: 'London',
+            code: 35433,
+            country: 'United Kingdom',
+        },
+        contact: [+34829374892553, 'andyluger@aol.com'],
+        isAvailable: true
+    }
+]
 
 // Functions
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
-
 populateUser(you.isReturning, you.firstName)
+
+let authorityStatus : any
+
+isLoggedIn = false
+
+//the authorityStatus can now take two different inout types
+function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
+   if (authorityStatus) {
+       const priceDisplay = document.createElement('div')
+       priceDisplay.innerHTML = price.toString() + '/night'
+       element.appendChild(priceDisplay)
+   }
+}
 
 // Add the properties
 for (let i = 0; i < properties.length; i++) {
@@ -193,11 +162,11 @@ for (let i = 0; i < properties.length; i++) {
     image.setAttribute('src', properties[i].image)
     card.appendChild(image)
     propertyContainer.appendChild(card)
+    //enter value here
+    // either enter "you.permissions"
+    // or enter "isLoggedIn"
+    showDetails(you.permissions, card, properties[i].price)
 }
 
-// use your location, your current time, and the current temperature of your
-//  location
-// declare and assign the Tuple
-// change the innerHTML in order to be able to handle the Tuple and simply concatenate values from the array as strings
-let currentLocation: [string, string, number] = ['Amsterdam', '20:35', 23]
-footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2]
+let currentLocation : [string, string, number] = ['London', '11.03', 17]
+footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
