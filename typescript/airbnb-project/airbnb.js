@@ -26,6 +26,34 @@ var LoyaltyUser;
     LoyaltyUser["SILVER_USER"] = "SILVER_USER";
     LoyaltyUser["BRONZE_USER"] = "BRONZE_USER";
 })(LoyaltyUser || (LoyaltyUser = {}));
+// if you already know which kind of structures your data will have, and it
+// will have only TWO different ones, you can assign all the types
+// with a UNION pipe stripey thingy like so:
+/*
+// Reviews
+const reviews : (
+    {
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+} |
+{
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+    description: string;
+}
+)[]= [
+    {
+        ...
+*/
+// if you have AbsoLuteLy NO idea what amount of variables will come in, you can use the ANY type liek so:
+/*
+const reviews : any[] = [
+    {...
+*/
 const reviews = [
     {
         name: 'Sheia',
