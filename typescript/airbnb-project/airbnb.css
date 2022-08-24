@@ -1,3 +1,13 @@
+/* 
+// Wrapping up our Dashboard
+// Style the 'Get Reviews' Button
+// Make the button green
+// Make the text white = hsl(0, 0%, 100%)
+// Give the button a 5px border radius
+// Make the button turn yellow on hover
+// // replace all colornames, either pick HEX or RGB or HSL
+ */
+
 body {
     display: flex;
     margin: 0;
@@ -8,16 +18,20 @@ body {
 }
 
 .container {
-    margin: 20px;
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.container img {
+    width: 100%;
+}
+
 .nav-bar {
     width: 100%;
     position: sticky;
-    background-color: white;
+    background-color: hsl(0, 0%, 100%);
     box-shadow: rgb(0 0 0 / 12%) 0 1px 8px;
     display: flex;
     justify-content: space-between;
@@ -38,6 +52,8 @@ body {
 .properties {
     display: flex;
     flex-wrap: wrap;
+    /* center all of the house cards */
+    justify-content: center;
 }
 
 .card {
@@ -56,8 +72,9 @@ body {
     width: 100%;
     background-color: lightcoral;
     text-align: center;
-    padding: 30px;
-    color: white;
+    /* no padding on left or right */
+    padding: 30px 0;
+    color: hsl(0, 0%, 100%);
 }
 
 .review-card {
@@ -73,4 +90,16 @@ body {
     height: 1px;
     width: 90%;
     background-color: coral;
+}
+
+button {
+    background-color: green;
+    color: hsl(0, 0%, 100%);
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: darkgoldenrod;
 }

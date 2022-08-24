@@ -7,14 +7,15 @@ import { Price, Country} from './types' //= literal types
 import Review from './interfaces'
 */
 
-// Wrapping up our Dashboard
-// add another property/house card. The Property/house should have:
-// 1 x picture of a 'Malaysian Hotel' called 'Malia Hotel'
-// It should cost 35/night
-// It's location should be 'Room 4, Malia , Malaysia, 45334'
-// The contact email should be 'lee34@gmail.com'
-// The phone number for the property should be +60349822083
-// It should not be available
+/* 
+// Styling our Dashboard
+// Style the 'Get Reviews' Button
+// Make the button green
+// Make the text white
+// Give the button a 5px border radius
+// Make the button turn yellow on hover
+// replace all colornames, either pick HEX or RGB or HSL
+*/
 
 
 // START INTERFACES
