@@ -1,11 +1,10 @@
 // put all code back in one file, because import/export doesn't work
 
-// Tuples challenge
-// 1. Add an array to the variable of currentLocation I have added. This array
-// must have your current location, time, and degrees celcius of your location
-// NOTE: make sure to make this a Tuple, to only allow those types in that
-// structure.
-// 2. Add this visually to a footer on your site
+/*
+import { showReviewTotal, populateUser } from './utils'
+import { Permissions, LoyaltyUser } from './enums'
+*/
+
 
 const propertyContainer = document.querySelector('.properties')
 const footer = document.querySelector('.footer')
@@ -14,8 +13,8 @@ const returningUserDisplay = document.querySelector('#returning-user')
 const userNameDisplay = document.querySelector('#user')
 const reviewTotalDisplay = document.querySelector('#reviews')
 
-function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
-    const iconDisplay = isLoyalty ? '⭐' : ''
+function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
+    const iconDisplay = (LoyaltyUser.GOLD_USER) ? '⭐' : ''
     reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
@@ -29,65 +28,62 @@ function populateUser(isReturning: boolean, userName: string) {
 let isOpen: boolean
 
 // Reviews
+enum LoyaltyUser {
+    GOLD_USER = 'GOLD_USER', 
+    SILVER_USER = 'SILVER_USER',
+    BRONZE_USER = 'BRONZE_USER'
+}
+
 const reviews: {
     name: string;
     stars: number;
-    loyaltyUser: boolean;
+    loyaltyUser: LoyaltyUser;
     date: string
 }[] = [
         {
             name: 'Sheia',
             stars: 5,
-            loyaltyUser: true,
+            loyaltyUser: LoyaltyUser.GOLD_USER,
             date: '01-04-2021'
         },
         {
             name: 'Andrzej',
             stars: 3,
-            loyaltyUser: false,
+            loyaltyUser: LoyaltyUser.BRONZE_USER,
             date: '28-03-2021'
         },
         {
             name: 'Omar',
             stars: 4,
-            loyaltyUser: true,
+            loyaltyUser: LoyaltyUser.SILVER_USER,
             date: '27-03-2021'
         },
     ]
 
+
 // User
-// const you: {
-//     firstName: string;
-//     lastName: string;
-//     isReturning: boolean;
-//     age: number;
-//     stayedAt: string[]
-// } = {
-//     firstName: 'Bobby',
-//     lastName: 'Brown',
-//     isReturning: true,
-//     age: 35,
-//     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
-// }
-
-const ADMIN = 'admin';
-const READ_ONLY = 'read-only';
-
 enum Permissions {
-    ADMIN,
-    READ_ONLY
+    ADMIN = 'ADMIN', 
+    READ_ONLY = 'READ_ONLY'
 }
 
-const you = {
+const you: {
+    firstName: string;
+    lastName: string;
+    permissions: Permissions;
+    isReturning: boolean;
+    age: number;
+    stayedAt: string[]
+} = {
     firstName: 'Bobby',
     lastName: 'Brown',
-    permissions: Permissions[ADMIN], //more correct would be "Permissions.ADMIN" but the linter gives errors
+    permissions: Permissions.ADMIN,
     isReturning: true,
     age: 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-if (you.permissions === Permissions[ADMIN]) {
+if (you.permissions === Permissions.ADMIN) {
     //show
     console.log("The custom-type enum for Admin works!")
 } else {
