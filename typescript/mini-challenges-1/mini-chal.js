@@ -1,13 +1,13 @@
 // Array Types mini-challenge
 // Can youM assign the correct Type to the reviewsM const? Please bear in mind everything
 // we have learnt about String, Boolean, Number, Object and Array Types for this.
-const returningUserDisplayM = document.querySelector('#returning-userm');
-const userNameDisplayM = document.querySelector('#userm');
-const reviewTotalDisplayM = document.querySelector('#reviewsM');
-let isOpenM;
+var returningUserDisplayM = document.querySelector('#returning-userm');
+var userNameDisplayM = document.querySelector('#userm');
+var reviewTotalDisplayM = document.querySelector('#reviewsM');
+var isOpenM;
 // this is aan array of objects
 // and inside of it the keys have types
-const reviewsM = [
+var reviewsM = [
     {
         name: 'Sheia',
         stars: 5,
@@ -28,11 +28,11 @@ const reviewsM = [
     },
 ];
 function showReviewTotalM(value, reviewer, isLoyalty) {
-    const iconDisplay = isLoyalty ? '⭐' : '';
+    var iconDisplay = isLoyalty ? '⭐' : '';
     reviewTotalDisplayM.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay;
 }
 showReviewTotalM(reviewsM.length, reviewsM[0].name, reviewsM[0].loyaltyUser);
-const youM = {
+var youM = {
     firstName: 'Bobby',
     lastName: 'Brown',
     isReturning: true,

@@ -1,95 +1,9 @@
-// put all code back in one file, because import/export doesn't work
+// Code Tidy
 
-/*
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
-import { Permissions, LoyaltyUser } from './enums'
-import { Price, Country} from './types' //= literal types
-import Review from './interfaces'
-*/
-
-/* 
-// Styling our Dashboard
-// Style the 'Get Reviews' Button
-// Make the button green
-// Make the text white
-// Give the button a 5px border radius
-// Make the button turn yellow on hover
-// replace all colornames, either pick HEX or RGB or HSL
-*/
-
-
-// START INTERFACES
-interface Review {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;
-}
-// END INTERFACES
-
-
-
-// START UTILS
-const reviewTotalDisplay = document.querySelector('#reviews')
-const returningUserDisplay = document.querySelector('#returning-user')
-const userNameDisplay = document.querySelector('#user')
-
-function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
-    const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : ''
-    reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay    
-}
-
-function populateUser(isReturning : boolean, userName: string ) {
-    if (isReturning == true){
-        returningUserDisplay.innerHTML = 'back'
-    }
-    userNameDisplay.innerHTML = userName
-}
-
-function showDetails(value: boolean | Permissions, element : HTMLDivElement, price: number) {
-    if (value) {
-        const priceDisplay = document.createElement('div')
-        priceDisplay.innerHTML = price.toString() + '/night'
-        element.appendChild(priceDisplay)
-    }
-}
-
-function makeMultiple(value: number) : string {
-    if (value > 1 || value == 0) {
-        return 's'
-    } else return ''
-}
-
-// this is an interface where the result is another array, and coincidentally the same array
-function getTopTwoReviews(reviews : Review[]) : Review[]  {
- const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
- return sortedReviews.slice(0,2)
-}
-// END UTILS
-
-
-
-// START ENUMS
-enum Permissions {
-    ADMIN = 'ADMIN',
-    READ_ONLY = 'READ_ONLY'
-}
-
-enum LoyaltyUser {
-    GOLD_USER = 'GOLD_USER',
-    SILVER_USER = 'SILVER_USER',
-    BRONZE_USER = 'BRONZE_USER'
-}
-// END ENUMS
-
-
-
-// START TYPES
-type Price = 45 | 30 | 25 | 35
-type Country = 'Colombia' | 'Poland' | 'United Kingdom' | 'Malaysia'
-// END TYPES
-
-
+import { Permissions , LoyaltyUser } from './enums'
+import { Review, Property } from './interfaces'
+import MainProperty from './classes' 
 const propertyContainer = document.querySelector('.properties')
 const reviewContainer = document.querySelector('.reviews')
 const container = document.querySelector('.container')
@@ -98,12 +12,10 @@ const footer = document.querySelector('.footer')
 
 let isLoggedIn: boolean
 
-
 // Reviews
-// example of nice way to use an interface instead of many Keys
 const reviews: Review[] = [
     {
-        name: 'Sheia',
+        name: 'Sheila',
         stars: 5,
         loyaltyUser: LoyaltyUser.GOLD_USER,
         date: '01-04-2021'
@@ -131,24 +43,6 @@ const you = {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-// build the interface, and assign the Literal Types!
-// but don't forget to import them if they are in a different file
-interface Property {
-    image: string;
-    title: string;
-    price: Price;
-    location: {
-        firstLine: string;
-        city: string;
-        code: number | string;
-        country: Country
-    }
-    contact: [ number, string];
-    isAvailable: boolean;
-}
-
-
-
 // Array of Properties
 const properties : Property[] = [
     {
@@ -167,7 +61,7 @@ const properties : Property[] = [
     {
         image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
-        price: 35,
+        price: 30,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -191,17 +85,16 @@ const properties : Property[] = [
         isAvailable: true
     },
     {
-        image: 'images/malaysia-property.jpg',
+        image: 'images/malaysian-hotel.jpeg',
         title: 'Malia Hotel',
         price: 35,
         location: {
-            //Room 4, Malia , Malaysia, 45334
             firstLine: 'Room 4',
             city: 'Malia',
             code: 45334,
-            country: 'Malaysia',
+            country: 'Malaysia'
         },
-        contact: [+60349822083, 'lee34@gmail.com'],
+        contact: [ +60349822083, 'lee34@gmail.com'],
         isAvailable: false
     }
 ]
@@ -224,7 +117,7 @@ for (let i = 0; i < properties.length; i++) {
 }
 
 let count = 0
-function addReviews(array: Review[]) : void {
+function addReviews(array : Review[]) : void {
     if (!count ) {
         count++
         const topTwo = getTopTwoReviews(array)
@@ -243,20 +136,7 @@ button.addEventListener('click', () => addReviews(reviews))
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
-// mainproperty for Main Image
-// Classes
-class MainProperty {
-    src: string
-    title: string
-    reviews: Review[]
-    constructor(src: string, title: string, reviews: Review[]) {
-        this.src = src
-        this.title = title
-        this.reviews = reviews
-    }
-}
 
-// instantiate an object from the class, by filling in values
 let yourMainProperty = new MainProperty(
     'images/italian-property.jpg', 
     'Italian House',

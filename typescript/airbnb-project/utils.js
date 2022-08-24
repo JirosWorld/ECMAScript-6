@@ -1,51 +1,41 @@
-/*
-const reviewTotalDisplay = document.querySelector('#reviews')
-const returningUserDisplay = document.querySelector('#returning-user')
-const userNameDisplay = document.querySelector('#user')
-import { Review } from './interfaces'
-
-enum Permissions {
-    ADMIN = 'ADMIN',
-    READ_ONLY = 'READ_ONLY'
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTopTwoReviews = exports.makeMultiple = exports.showDetails = exports.populateUser = exports.showReviewTotal = void 0;
+var reviewTotalDisplay = document.querySelector('#reviews');
+var returningUserDisplay = document.querySelector('#returning-user');
+var userNameDisplay = document.querySelector('#user');
+var enums_1 = require("./enums");
+function showReviewTotal(value, reviewer, isLoyalty) {
+    var iconDisplay = enums_1.LoyaltyUser.GOLD_USER ? '⭐' : '';
+    reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay;
 }
-
-enum LoyaltyUser {
-    GOLD_USER = 'GOLD_USER',
-    SILVER_USER = 'SILVER_USER',
-    BRONZE_USER = 'BRONZE_USER'
-}
-
-export function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
-    const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : ''
-    reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay
-}
-
-export function populateUser(isReturning : boolean, userName: string ) {
-    if (isReturning == true){
-        returningUserDisplay.innerHTML = 'back'
+exports.showReviewTotal = showReviewTotal;
+function populateUser(isReturning, userName) {
+    if (isReturning) {
+        returningUserDisplay.innerHTML = 'back';
     }
-    userNameDisplay.innerHTML = userName
+    userNameDisplay.innerHTML = userName;
 }
-
-export function showDetails(value: boolean | Permissions, element : HTMLDivElement, price: number) {
+exports.populateUser = populateUser;
+function showDetails(value, element, price) {
     if (value) {
-        const priceDisplay = document.createElement('div')
-        priceDisplay.innerHTML = price.toString() + '/night'
-        element.appendChild(priceDisplay)
+        var priceDisplay = document.createElement('div');
+        priceDisplay.innerHTML = price.toString() + '/night';
+        element.appendChild(priceDisplay);
     }
 }
-
-export function makeMultiple(value: number) : string {
+exports.showDetails = showDetails;
+function makeMultiple(value) {
     if (value > 1 || value == 0) {
-        return 's'
-    } else return ''
+        return 's';
+    }
+    else
+        return '';
 }
-
-export function getTopTwoReviews(reviews : Review[]) : Review[]  {
- const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
- return sortedReviews.slice(0,2)
+exports.makeMultiple = makeMultiple;
+function getTopTwoReviews(reviews) {
+    var sortedReviews = reviews.sort(function (a, b) { return b.stars - a.stars; });
+    return sortedReviews.slice(0, 2);
 }
-*/
-// in real-life development this would be best
-// not used now since webpack isn't enabled
+exports.getTopTwoReviews = getTopTwoReviews;
 //# sourceMappingURL=utils.js.map
