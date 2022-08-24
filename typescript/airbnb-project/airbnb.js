@@ -1,29 +1,25 @@
 // put all code back in one file, because import/export doesn't work
-/*
-import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
-import { showReviewTotal, populateUser } from './utils'
-import { Permissions, LoyaltyUser } from './enums'
-import { Price, Country } from './types'
-*/
-// Function Types challenge - Pass the code review
-// 
-// 1. Add types to the function that returns the top 2 reviews specifically based on
-// descending order. Make sure to use what you learned in the previous lessons.
-// 2. Add types to the function in this file that shows the reviews when we click the button
+// END INTERFACES
 // START UTILS
 const reviewTotalDisplay = document.querySelector('#reviews');
 const returningUserDisplay = document.querySelector('#returning-user');
 const userNameDisplay = document.querySelector('#user');
 function showReviewTotal(value, reviewer, isLoyalty) {
     const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : '';
-    // make a nicer way to show plural or singular nr. of reviews
-    reviewTotalDisplay.innerHTML = value.toString() + ' Review' + makeMultiple(value) + '| last reviewed by ' + reviewer + ' ' + iconDisplay;
+    reviewTotalDisplay.innerHTML = value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay;
 }
 function populateUser(isReturning, userName) {
     if (isReturning == true) {
         returningUserDisplay.innerHTML = 'back';
     }
     userNameDisplay.innerHTML = userName;
+}
+function showDetails(value, element, price) {
+    if (value) {
+        const priceDisplay = document.createElement('div');
+        priceDisplay.innerHTML = price.toString() + '/night';
+        element.appendChild(priceDisplay);
+    }
 }
 function makeMultiple(value) {
     if (value > 1 || value == 0) {
@@ -32,14 +28,9 @@ function makeMultiple(value) {
     else
         return '';
 }
-// Broken code in utils
-// --> only see the Top reviews
-// 'reviews' results in an array of objects = {}[], so add those as a type
-// but it also has a Return!
-// it (again) returns an array of objects, that you can either assing or type 'any'
+// this is an interface where the result is another array, and coincidentally the same array
 function getTopTwoReviews(reviews) {
     const sortedReviews = reviews.sort((a, b) => b.stars - a.stars);
-    console.log(sortedReviews.slice(0, 2));
     return sortedReviews.slice(0, 2);
 }
 // END UTILS
@@ -63,6 +54,7 @@ const button = document.querySelector('button');
 const footer = document.querySelector('.footer');
 let isLoggedIn;
 // Reviews
+// example of nice way to use an interface instead of many Keys
 const reviews = [
     {
         name: 'Sheia',
@@ -81,7 +73,6 @@ const reviews = [
         stars: 4,
         loyaltyUser: LoyaltyUser.SILVER_USER,
         date: '27-03-2021',
-        description: 'Great hosts, location was a bit further than said.'
     },
 ];
 const you = {
@@ -110,7 +101,7 @@ const properties = [
     {
         image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
-        price: 30,
+        price: 34,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -123,7 +114,7 @@ const properties = [
     {
         image: 'images/london-property.jpg',
         title: 'London Flat',
-        price: 25,
+        price: 23,
         location: {
             firstLine: 'flat 15',
             city: 'London',
@@ -135,17 +126,8 @@ const properties = [
     }
 ];
 // Functions
-showReviewTotal(1, reviews[0].name, reviews[0].loyaltyUser);
+showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
-let authorityStatus;
-isLoggedIn = false;
-function showDetails(authorityStatus, element, price) {
-    if (authorityStatus) {
-        const priceDisplay = document.createElement('div');
-        priceDisplay.innerHTML = price.toString() + '/night';
-        element.appendChild(priceDisplay);
-    }
-}
 // Add the properties
 for (let i = 0; i < properties.length; i++) {
     const card = document.createElement('div');
@@ -154,20 +136,14 @@ for (let i = 0; i < properties.length; i++) {
     const image = document.createElement('img');
     image.setAttribute('src', properties[i].image);
     card.appendChild(image);
-    propertyContainer.appendChild(card);
     showDetails(you.permissions, card, properties[i].price);
+    propertyContainer.appendChild(card);
 }
-//Broken code
-// --> only see the Top reviews
-// let count = 0
-// function addReviews(array: {string, name, loyaltyUser}) : void {
-// this function does NOT return anything, so is void
-// and: 'reviews' results in an array of objects = {}[], so add those as a type
 let count = 0;
-function addReviews(arrayz) {
+function addReviews(array) {
     if (!count) {
         count++;
-        const topTwo = getTopTwoReviews(arrayz);
+        const topTwo = getTopTwoReviews(array);
         for (let i = 0; i < topTwo.length; i++) {
             const card = document.createElement('div');
             card.classList.add('review-card');
@@ -177,7 +153,6 @@ function addReviews(arrayz) {
         container.removeChild(button);
     }
 }
-// when you click this button you will only see the Top reviews
 button.addEventListener('click', () => addReviews(reviews));
 let currentLocation = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
