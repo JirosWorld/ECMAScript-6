@@ -16,6 +16,21 @@ export default interface Review {
     loyaltyUser: LoyaltyUser;
     date: string;
 }
+
+export interface Property {
+    image: string;
+    title: string;
+    price: Price;
+    location: {
+        firstLine: string;
+        city: string;
+        code: number | string;
+        country: string
+    }
+    contact: [ number, string];
+    isAvailable: boolean;
+}
+
 */
 
 // in real-life development this would be best

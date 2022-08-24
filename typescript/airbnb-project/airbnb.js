@@ -46,7 +46,7 @@ var LoyaltyUser;
     LoyaltyUser["SILVER_USER"] = "SILVER_USER";
     LoyaltyUser["BRONZE_USER"] = "BRONZE_USER";
 })(LoyaltyUser || (LoyaltyUser = {}));
-// END ENUMS
+// END TYPES
 const propertyContainer = document.querySelector('.properties');
 const reviewContainer = document.querySelector('.reviews');
 const container = document.querySelector('.container');
@@ -157,6 +157,7 @@ button.addEventListener('click', () => addReviews(reviews));
 let currentLocation = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
 // mainproperty for Main Image
+// Classes
 class MainProperty {
     constructor(src, title, reviews) {
         this.src = src;
@@ -164,4 +165,15 @@ class MainProperty {
         this.reviews = reviews;
     }
 }
+// instantiate an object from the class, by filling in values
+let yourMainProperty = new MainProperty('images/italian-property.jpg', 'Italian House', [{
+        name: 'Olive',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '12-04-2021'
+    }]);
+const mainImageContainer = document.querySelector('.main-image');
+const image = document.createElement('img');
+image.setAttribute('src', yourMainProperty.src);
+mainImageContainer.appendChild(image);
 //# sourceMappingURL=airbnb.js.map

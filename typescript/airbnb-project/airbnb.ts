@@ -3,35 +3,13 @@
 /*
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
 import { Permissions, LoyaltyUser } from './enums'
-import { Price, Country} from './types'
+import { Price, Country} from './types' //= literal types
 import Review from './interfaces'
 */
 
-// Classes
-// As with other JavaScript language features, TypeScript adds type
-// annotations and other syntax to allow you to express relationships 
-// between classes and other types.
-// 1. Add a Class that will let us create a main image, it should allow us to 
-// store the reviews.
-
-// Scroll down for solution
-
-/*
-// this is how you make a Class in Typescript (needs types)
-
-//Classes
-class Pigeon {
-    breed: string
-    birthyear: number
-    color: string
-    constructor(breed: string, birthyear: number, color: string) {
-        this.breed = breed
-        this.birthyear = birthyear
-        this.color = color
-    }
-}
-
-*/
+// Wrapping up our Dashboard
+// 1. Create All the other interfaces you think are needed for this board (only 1)
+// 2. Using the Class, visually show the main Image above the review button.
 
 
 // START INTERFACES
@@ -100,6 +78,12 @@ enum LoyaltyUser {
 
 
 
+// START TYPES
+type Price = 25 | 30 | 45
+type Country = 'Colombia' | 'Poland' | 'United Kingdom'
+// END TYPES
+
+
 const propertyContainer = document.querySelector('.properties')
 const reviewContainer = document.querySelector('.reviews')
 const container = document.querySelector('.container')
@@ -141,20 +125,26 @@ const you = {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-// Array of Properties
-const properties : {
+// build the interface, and assign the Literal Types!
+// but don't forget to import them if they are in a different file
+interface Property {
     image: string;
     title: string;
-    price: number;
+    price: Price;
     location: {
         firstLine: string;
         city: string;
-        code: number;
-        country: string;
-    };
-    contact: [ number, string ];
+        code: number | string;
+        country: Country
+    }
+    contact: [ number, string];
     isAvailable: boolean;
-}[] = [
+}
+
+
+
+// Array of Properties
+const properties : Property[] = [
     {
         image: 'images/colombia-property.jpg',
         title: 'Colombian Shack',
@@ -234,13 +224,30 @@ let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
 // mainproperty for Main Image
+// Classes
 class MainProperty {
     src: string
     title: string
     reviews: Review[]
-    constructor(src, title, reviews) {
+    constructor(src: string, title: string, reviews: Review[]) {
         this.src = src
         this.title = title
         this.reviews = reviews
     }
 }
+
+// instantiate an object from the class, by filling in values
+let yourMainProperty = new MainProperty(
+    'images/italian-property.jpg', 
+    'Italian House',
+    [{
+        name: 'Olive',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '12-04-2021'
+    }] )
+
+const mainImageContainer = document.querySelector('.main-image')
+const image = document.createElement('img')
+image.setAttribute('src', yourMainProperty.src)
+mainImageContainer.appendChild(image)
