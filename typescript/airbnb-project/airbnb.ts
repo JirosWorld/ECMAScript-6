@@ -6,12 +6,12 @@ import { Permissions, LoyaltyUser } from './enums'
 import { Price, Country } from './types'
 */
 
-// Literal Types: 
- // if you want to standardize your site/data
-// 1. Based on what we have learnt about literal types with the price, can you make
-// a Country literal type? You only have to include the countries we are dealing with in 
-// the project.
-// 2. Can you create a file and store all your types in there?
+// Types of Functions, and how they van be Void types
+ // 
+// Function Return Types + Void Types mini-challenge
+// Instead of having a long 'review total 3', can you make the line say '3 reviews', or '1 review'
+// if there is only one? Use a function to do this and assing a type to the functions return. 
+
 
 // START UTILS
 const reviewTotalDisplay = document.querySelector('#reviews')
@@ -20,7 +20,8 @@ const userNameDisplay = document.querySelector('#user')
 
 function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
     const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : ''
-    reviewTotalDisplay.innerHTML = 'review total ' + value.toString() + '| last reviewed by ' + reviewer + ' ' + iconDisplay
+    // make a nicer way to show plural or singular nr. of reviews
+    reviewTotalDisplay.innerHTML =  value.toString() + ' Review' + makeMultiple(value) + '| last reviewed by ' + reviewer + ' ' + iconDisplay
 }
 
 function populateUser(isReturning : boolean, userName: string ) {
@@ -28,6 +29,13 @@ function populateUser(isReturning : boolean, userName: string ) {
         returningUserDisplay.innerHTML = 'back'
     }
     userNameDisplay.innerHTML = userName
+}
+
+// a util function to display the wording for plural nr of reviews correctly
+function makeMultiple(value: number): string {
+    if (value > 1 || value == 0 ) {
+        return 's'
+    } else return ''
 }
 // END UTILS
 
@@ -144,7 +152,9 @@ const properties : {
 ]
 
 // Functions
-showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
+// change this to show the plurals or single form of Review/S
+// showReviewTotal([[reviews.length]], reviews[0].name, reviews[0].loyaltyUser)
+showReviewTotal(1, reviews[0].name, reviews[0].loyaltyUser)
 populateUser(you.isReturning, you.firstName)
 
 let authorityStatus : any
