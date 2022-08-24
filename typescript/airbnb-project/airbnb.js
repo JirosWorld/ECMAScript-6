@@ -1,14 +1,15 @@
 // put all code back in one file, because import/export doesn't work
 /*
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
 import { showReviewTotal, populateUser } from './utils'
 import { Permissions, LoyaltyUser } from './enums'
 import { Price, Country } from './types'
 */
-// Types of Functions, and how they van be Void types
+// Function Types challenge - Pass the code review
 // 
-// Function Return Types + Void Types mini-challenge
-// Instead of having a long 'review total 3', can you make the line say '3 reviews', or '1 review'
-// if there is only one? Use a function to do this and assing a type to the functions return. 
+// 1. Add types to the function that returns the top 2 reviews specifically based on
+// descending order. Make sure to use what you learned in the previous lessons.
+// 2. Add types to the function in this file that shows the reviews when we click the button
 // START UTILS
 const reviewTotalDisplay = document.querySelector('#reviews');
 const returningUserDisplay = document.querySelector('#returning-user');
@@ -24,13 +25,22 @@ function populateUser(isReturning, userName) {
     }
     userNameDisplay.innerHTML = userName;
 }
-// a util function to display the wording for plural nr of reviews correctly
 function makeMultiple(value) {
     if (value > 1 || value == 0) {
         return 's';
     }
     else
         return '';
+}
+// Broken code in utils
+// --> only see the Top reviews
+// 'reviews' results in an array of objects = {}[], so add those as a type
+// but it also has a Return!
+// it (again) returns an array of objects, that you can either assing or type 'any'
+function getTopTwoReviews(reviews) {
+    const sortedReviews = reviews.sort((a, b) => b.stars - a.stars);
+    console.log(sortedReviews.slice(0, 2));
+    return sortedReviews.slice(0, 2);
 }
 // END UTILS
 // START ENUMS
@@ -47,6 +57,9 @@ var LoyaltyUser;
 })(LoyaltyUser || (LoyaltyUser = {}));
 // END ENUMS
 const propertyContainer = document.querySelector('.properties');
+const reviewContainer = document.querySelector('.reviews');
+const container = document.querySelector('.container');
+const button = document.querySelector('button');
 const footer = document.querySelector('.footer');
 let isLoggedIn;
 // Reviews
@@ -122,8 +135,6 @@ const properties = [
     }
 ];
 // Functions
-// change this to show the plurals or single form of Review/S
-// showReviewTotal([[reviews.length]], reviews[0].name, reviews[0].loyaltyUser)
 showReviewTotal(1, reviews[0].name, reviews[0].loyaltyUser);
 populateUser(you.isReturning, you.firstName);
 let authorityStatus;
@@ -146,6 +157,28 @@ for (let i = 0; i < properties.length; i++) {
     propertyContainer.appendChild(card);
     showDetails(you.permissions, card, properties[i].price);
 }
+//Broken code
+// --> only see the Top reviews
+// let count = 0
+// function addReviews(array: {string, name, loyaltyUser}) : void {
+// this function does NOT return anything, so is void
+// and: 'reviews' results in an array of objects = {}[], so add those as a type
+let count = 0;
+function addReviews(arrayz) {
+    if (!count) {
+        count++;
+        const topTwo = getTopTwoReviews(arrayz);
+        for (let i = 0; i < topTwo.length; i++) {
+            const card = document.createElement('div');
+            card.classList.add('review-card');
+            card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name;
+            reviewContainer.appendChild(card);
+        }
+        container.removeChild(button);
+    }
+}
+// when you click this button you will only see the Top reviews
+button.addEventListener('click', () => addReviews(reviews));
 let currentLocation = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
 //# sourceMappingURL=airbnb.js.map
