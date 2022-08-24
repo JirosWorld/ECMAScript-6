@@ -101,7 +101,7 @@ const properties = [
     {
         image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
-        price: 34,
+        price: 35,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -114,15 +114,29 @@ const properties = [
     {
         image: 'images/london-property.jpg',
         title: 'London Flat',
-        price: 23,
+        price: 25,
         location: {
             firstLine: 'flat 15',
             city: 'London',
-            code: 35433,
+            code: 'SW4 5XW',
             country: 'United Kingdom',
         },
         contact: [+34829374892553, 'andyluger@aol.com'],
         isAvailable: true
+    },
+    {
+        image: 'images/malaysia-property.jpg',
+        title: 'Malia Hotel',
+        price: 35,
+        location: {
+            //Room 4, Malia , Malaysia, 45334
+            firstLine: 'Room 4',
+            city: 'Malia',
+            code: 45334,
+            country: 'Malaysia',
+        },
+        contact: [+60349822083, 'lee34@gmail.com'],
+        isAvailable: false
     }
 ];
 // Functions
