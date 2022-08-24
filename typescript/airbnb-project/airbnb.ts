@@ -3,18 +3,35 @@
 /*
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
 import { Permissions, LoyaltyUser } from './enums'
-import { Price, Country} from './types' // module with multiple exports
-import Review from './interfaces' // export default, name this nythign you want
-// import Pigeon from './interfaces' // would actually work!
+import { Price, Country} from './types'
+import Review from './interfaces'
 */
 
-// in Typescript two types are compatible if their internal structure is compatible
-// meaning: you can define an Interface once, and do not need to explicitly declare its derivations
-// -->
-// // Interfaces
-// 1. Based on what we have learnt in this lesson, and what we discussed in the previous one,
-// please get rid of the uncessary code in this project and replace it with the Review interface
-// 2. Move the interface to its own file for the next lesson
+// Classes
+// As with other JavaScript language features, TypeScript adds type
+// annotations and other syntax to allow you to express relationships 
+// between classes and other types.
+// 1. Add a Class that will let us create a main image, it should allow us to 
+// store the reviews.
+
+// Scroll down for solution
+
+/*
+// this is how you make a Class in Typescript (needs types)
+
+//Classes
+class Pigeon {
+    breed: string
+    birthyear: number
+    color: string
+    constructor(breed: string, birthyear: number, color: string) {
+        this.breed = breed
+        this.birthyear = birthyear
+        this.color = color
+    }
+}
+
+*/
 
 
 // START INTERFACES
@@ -215,3 +232,15 @@ button.addEventListener('click', () => addReviews(reviews))
 
 let currentLocation : [string, string, number] = ['London', '11.03', 17]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
+
+// mainproperty for Main Image
+class MainProperty {
+    src: string
+    title: string
+    reviews: Review[]
+    constructor(src, title, reviews) {
+        this.src = src
+        this.title = title
+        this.reviews = reviews
+    }
+}
