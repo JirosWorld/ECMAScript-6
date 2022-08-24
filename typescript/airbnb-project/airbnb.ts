@@ -3,7 +3,15 @@
 /*
 import { showReviewTotal, populateUser } from './utils'
 import { Permissions, LoyaltyUser } from './enums'
+import { Price, Country } from './types'
 */
+
+// Literal Types: 
+ // if you want to standardize your site/data
+// 1. Based on what we have learnt about literal types with the price, can you make
+// a Country literal type? You only have to include the countries we are dealing with in 
+// the project.
+// 2. Can you create a file and store all your types in there?
 
 // START UTILS
 const reviewTotalDisplay = document.querySelector('#reviews')
@@ -36,12 +44,6 @@ enum LoyaltyUser {
     BRONZE_USER = 'BRONZE_USER'
 }
 // END ENUMS
-
-// Union Types Challenge
-// 1. Fix the function to show the price per night for each property card only
-// if isLoggedIn is true, or the you object has Permissions. (all permissions should work)
-// 2. See what happens when a null object to be passed to the you objects permissions.
-
 
 const propertyContainer = document.querySelector('.properties')
 const footer = document.querySelector('.footer')
@@ -82,15 +84,20 @@ const you = {
 
 
 // Array of Properties
+// and standardized Price with Literal types (type Alias)
+
+type Price = 45 | 30 | 25;
+type Country = "Colombia" | "Poland" | "United Kingdom";
+// Array of Properties
 const properties : {
     image: string;
     title: string;
-    price: number;
+    price: Price;
     location: {
         firstLine: string;
         city: string;
         code: number;
-        country: string;
+        country: Country;
     };
     contact: [ number, string ];
     isAvailable: boolean;
@@ -111,7 +118,7 @@ const properties : {
     {
         image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
-        price: 34,
+        price: 30,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -124,7 +131,7 @@ const properties : {
     {
         image: 'images/london-property.jpg',
         title: 'London Flat',
-        price: 23,
+        price: 25,
         location: {
             firstLine: 'flat 15',
             city: 'London',
@@ -144,7 +151,6 @@ let authorityStatus : any
 
 isLoggedIn = false
 
-//the authorityStatus can now take two different inout types
 function showDetails(authorityStatus: boolean | Permissions, element : HTMLDivElement, price: number) {
    if (authorityStatus) {
        const priceDisplay = document.createElement('div')
@@ -162,9 +168,6 @@ for (let i = 0; i < properties.length; i++) {
     image.setAttribute('src', properties[i].image)
     card.appendChild(image)
     propertyContainer.appendChild(card)
-    //enter value here
-    // either enter "you.permissions"
-    // or enter "isLoggedIn"
     showDetails(you.permissions, card, properties[i].price)
 }
 
