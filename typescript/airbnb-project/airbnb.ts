@@ -3,8 +3,9 @@
 /*
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews} from './utils'
 import { Permissions, LoyaltyUser } from './enums'
-import { Price, Country} from './types'
-import { Review } from './interfaces'
+import { Price, Country} from './types' // module with multiple exports
+import Review from './interfaces' // export default, name this nythign you want
+// import Pigeon from './interfaces' // would actually work!
 */
 
 // in Typescript two types are compatible if their internal structure is compatible

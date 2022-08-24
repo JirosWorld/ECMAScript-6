@@ -8,7 +8,9 @@ import { LoyaltyUser } from './enum'
 //     BRONZE_USER = 'BRONZE_USER'
 // }
 
-export interface Review {
+// note: this is a module with Export Deafult!
+// so: would result in a call where you can rename it to anything you want, without curly-braces
+export default interface Review {
     name: string;
     stars: number;
     loyaltyUser: LoyaltyUser;
