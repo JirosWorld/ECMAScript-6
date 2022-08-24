@@ -56,19 +56,44 @@ const reviews: {
     ]
 
 // User
-const you: {
-    firstName: string;
-    lastName: string;
-    isReturning: boolean;
-    age: number;
-    stayedAt: string[]
-} = {
+// const you: {
+//     firstName: string;
+//     lastName: string;
+//     isReturning: boolean;
+//     age: number;
+//     stayedAt: string[]
+// } = {
+//     firstName: 'Bobby',
+//     lastName: 'Brown',
+//     isReturning: true,
+//     age: 35,
+//     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+// }
+
+const ADMIN = 'admin';
+const READ_ONLY = 'read-only';
+
+enum Permissions {
+    ADMIN,
+    READ_ONLY
+}
+
+const you = {
     firstName: 'Bobby',
     lastName: 'Brown',
+    permissions: Permissions[ADMIN], //more correct would be "Permissions.ADMIN" but the linter gives errors
     isReturning: true,
     age: 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
+
+if (you.permissions === Permissions[ADMIN]) {
+    //show
+    console.log("The custom-type enum for Admin works!")
+} else {
+    console.log("You are not an administrator.")
+}
+
 
 // Array of Properties
 const properties: {
@@ -145,6 +170,6 @@ for (let i = 0; i < properties.length; i++) {
 // use your location, your current time, and the current temperature of your
 //  location
 // declare and assign the Tuple
-// change the innerHTML in order to be able to handle the Tuple and use it like an array
+// change the innerHTML in order to be able to handle the Tuple and simply concatenate values from the array as strings
 let currentLocation: [string, string, number] = ['Amsterdam', '20:35', 23]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2]
